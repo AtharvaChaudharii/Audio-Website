@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "IPL 2026 Fan Trauma Test"
+version = "1.0.0"
+id = "artifacts/ipl-trauma-test"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22936
+
+[services.development]
+run = "pnpm --filter @workspace/ipl-trauma-test run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/ipl-trauma-test", "run", "build" ]
+publicDir = "artifacts/ipl-trauma-test/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22936"
+BASE_PATH = "/"

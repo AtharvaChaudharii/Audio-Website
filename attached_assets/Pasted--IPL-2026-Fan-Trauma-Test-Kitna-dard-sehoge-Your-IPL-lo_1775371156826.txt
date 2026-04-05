@@ -1,0 +1,537 @@
+"IPL 2026 Fan Trauma Test"
+"Kitna dard sehoge? Your IPL loyalty is being judged."
+🎯 Core Concept
+A brutally funny, scroll-based "psychological trauma assessment" for IPL fans — powered by real IPL 2026 events happening THIS WEEK. CSK just lost to PBKS, MI got beaten by DC, Sanju Samson is flopping at CSK, Hardik Pandya benched. The site KNOWS your team. It diagnoses your fan mental health. It roasts you specifically. It's a meme factory you can screenshot every 3 seconds.
+🧠 User Experience Flow
+Scene 0 — The Disclaimer
+Hospital/clinical UI. Siren noise. Red pulsing screen. Warning text types out:
+"⚠️ CAUTION: This diagnostic has caused CSK fans to lose sleep since March 22. PBKS fans are annoyingly fine. Proceed at your own risk."
+Cursor becomes a cricket bat.
+Scene 1 — Team Selection
+10 IPL team cards fan out like playing cards. Each card has the team logo + a savage one-liner:
+
+CSK: "Thala for a reason. The reason is suffering."
+MI: "5 trophies, 0 wins this week."
+RCB: "Loading... loading... (this has been loading since 2008)"
+PBKS: "TOP OF THE TABLE?? PBKS?? It's real."
+SRH: "226 runs and still anxious. Respect."
+
+User clicks their team. Card explodes into confetti of that team's colors.
+Scene 2 — The Diagnosis Scroll
+A fake medical "scan" of the user's brain. MRI machine sound effect. Brain highlights regions:
+
+"Toss anxiety region: OVERACTIVE"
+"Last-over faith: CLINICALLY ABSENT (CSK fans)"
+"Cooper Connolly respect: DEVELOPING"
+"Sanju Samson at CSK feelings: COMPLICATED"
+
+Each brain region clickable — popup with meme-format jokes about this week's actual matches.
+Scene 3 — The Trauma Timeline
+Horizontal scroll like a cricket scorecard. Timeline of THIS WEEK's IPL 2026 pain:
+
+April 1: "LSG 141 all out. KL Rahul golden duck. Goenka sahab's face 😭"
+April 2: "SRH 226. KKR fans: 'easy chase' [it was not easy]"
+April 3: "CSK vs PBKS. Priyansh Arya 39 off 11. Ma Chidambaram Stadium went quiet."
+April 4: "Hardik Pandya injured. Maheika didn't come to watch. Twitter combusted."
+
+Each date card: click to reveal a reaction meme format image (CSS-generated, no copyright).
+Scene 4 — The Fan Personality Type
+Based on team chosen → personality type reveals with dramatic animation:
+
+CSK fan: "The Eternal Optimist Who Hasn't Slept Since Tuesday"
+MI fan: "Trying to manifest the 6th trophy with sheer aggression"
+RCB fan: "A poet. A dreamer. Professionally heartbroken."
+PBKS fan: "Table topper energy. Still in shock. Refreshing the points table every 5 mins."
+
+Scene 5 — The Prescription
+Doctor's prescription pad (skeuomorphic design). Animated handwriting:
+Rx for: [User's Team] Fan
+─────────────────────────
+1. Stop checking Cricbuzz at 2 AM
+2. Accept Sanju Samson needs time
+3. One (1) cold Thums Up after each loss
+4. Strictly NO Twitter after powerplay
+5. Repeat: "It's just cricket." [DO NOT BELIEVE THIS]
+
+Dr. Dhoni
+MBBS, MS (Chennai Super Kings), PhD (Finishing Games)
+Share button generates this as a downloadable prescription PNG.
+Scene 6 — The Points Table of Life
+A modified IPL 2026 points table — but the columns are:
+TEAM | ACTUAL WINS | FAN SUFFERING | MEME OUTPUT | TWITTER FIGHTS | HOPE LEFT
+Auto-populated with funny fake numbers. PBKS: Hope Left = 99%. RCB: Hope Left = "Sir yeh toh eternal hai."
+🎨 UI/UX Style
+
+Medical/clinical white + team color injections per section
+IPL scoreboard aesthetic for the timeline
+Prescription pad: yellowed paper, doctor's scrawl font
+Points table: exact IPL 2026 scoreboard CSS replica
+Font: Rajdhani (Indian sporty) + Courier New (prescription) + bold Impact for memes
+Mobile-first — this WILL be screenshotted on phones
+
+🎵 Music & Sound Design
+SceneMusicSound Effects0Hospital flatline + crowd ambienceSiren wail, heartbeat monitor1IPL anthem (hummed/synthetic)Card flip SFX, crowd cheer per team2MRI machine humScanning beep, brain region click pop3Sad Bollywood violin riffCrowd groan, notification pings4Dramatic reveal musicDrum roll, reveal sting5Doctor's office ambient + light sitarPaper scribble SFX, stamp sound6Stadium announcer ambiencePoints table update SFX
+⚡ Interactions & Animations
+
+Cursor: Cricket bat that swings on click
+Team cards: 3D flip on hover (CSS perspective), shake on click
+Brain scan: Regions light up on mouseover, tooltip jokes
+Timeline: Horizontal drag/scroll, each card bounces in
+Prescription: Handwriting CSS animation draws in line by line
+Points table: Numbers count up (CountUp.js)
+Share button: html2canvas captures prescription → WhatsApp share (India's #1 platform)
+
+🧩 Unique Twist
+WhatsApp share button — not Twitter. This is India. The prescription PNG gets shared in every IPL group chat. Papa forwards it. Chacha saves it. It spreads through family WhatsApp groups which have 10x the reach of Twitter in India.
+
+🧾 FULL BUILD PROMPT
+Build a scroll-based interactive Indian web experience called 
+"IPL 2026 Fan Trauma Test" using HTML, CSS, JavaScript.
+CDNs: GSAP + ScrollTrigger, Howler.js, html2canvas, 
+CountUp.js, Google Fonts (Rajdhani, Courier Prime).
+This must feel like a viral Indian meme page crossed 
+with a hospital diagnostic tool.
+
+════════════════════════════════════════
+GLOBAL SETUP
+════════════════════════════════════════
+
+Body: background #f8f8f8, font-family: 'Rajdhani', sans-serif
+Scroll: scroll-snap-type y mandatory on html
+Each section: 100vh, scroll-snap-align start
+Custom cursor: hide default
+  Replace with cricket bat SVG (simple shape, 30px)
+  On click: rotate bat 45deg (GSAP), 
+    spawn small ball SVG that bounces off
+  Color: team color (changes after Scene 1 selection)
+
+State object:
+  const fanState = {
+    team: null,
+    teamColor: null,
+    teamEmoji: null,
+    traumaScore: 0
+  }
+
+Team color map:
+  CSK: {primary:'#ffc107', secondary:'#1a237e', emoji:'🦁'}
+  MI: {primary:'#004c93', secondary:'#d4af37', emoji:'🔵'}
+  RCB: {primary:'#c8102e', secondary:'#000', emoji:'🔴'}
+  PBKS: {primary:'#ED1B24', secondary:'#dcb240', emoji:'👑'}
+  KKR: {primary:'#3a225d', secondary:'#b8860b', emoji:'⚡'}
+  SRH: {primary:'#f7a721', secondary:'#1e1e1e', emoji:'☀️'}
+  DC: {primary:'#0078bc', secondary:'#ef1c25', emoji:'🔷'}
+  GT: {primary:'#1c1c6b', secondary:'#d4af37', emoji:'💙'}
+  RR: {primary:'#254aa5', secondary:'#ff69b4', emoji:'💗'}
+  LSG: {primary:'#a0d8f1', secondary:'#00274d', emoji:'🦟'}
+
+CSS custom property --team-color updates on selection
+  All accent elements use var(--team-color)
+
+════════════════════════════════════════
+SCENE 0 — DISCLAIMER
+════════════════════════════════════════
+
+Background: #0a0a0a with red pulse 
+  CSS: animation alternates background between 
+  #0a0a0a and rgba(220,0,0,0.05) every 1.5s
+
+Center content:
+  Red siren emoji: 🚨 — spins (CSS rotate animation)
+  Warning header: 
+    font: Impact, 
+    color: #ff3333
+    font-size: clamp(28px,5vw,52px)
+    "IPL 2026 FAN TRAUMA ASSESSMENT"
+  
+  Typewriter text (JS setInterval):
+    "⚠ CAUTION: This test has been deemed 
+     medically dangerous for CSK fans.
+     PBKS fans are annoyingly fine.
+     MI fans are in denial.
+     RCB fans never had hope to lose.
+     
+     Loading fan mental health records...
+     
+     ▼ SCROLL TO BEGIN YOUR DIAGNOSIS ▼"
+  
+  Font: 'Courier Prime', monospace
+  Color: #00ff41 on dark background
+  
+Flatline audio: Howler plays hospital flatline 
+  that transitions to heartbeat as scene enters
+Hospital ambient + crowd background drone
+
+Transition: GSAP opacity+y slide to Scene 1
+
+════════════════════════════════════════
+SCENE 1 — TEAM SELECTION
+════════════════════════════════════════
+
+Background: white, cricket pitch texture 
+  (CSS: repeating-linear-gradient for pitch lines)
+
+Heading: "CHOOSE YOUR TEAM"
+  "चुनो अपनी तकदीर" (subheading in Devanagari)
+  
+Team cards layout:
+  CSS Grid: 5 columns × 2 rows
+  Each card: 
+    width: min(140px, 28vw)
+    background: white
+    border: 2px solid rgba(0,0,0,0.1)
+    border-radius: 12px
+    padding: 16px
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.08)
+    transition: all 0.2s
+    
+    Content per card:
+      Team logo: large emoji or CSS-drawn logo
+      Team name: bold, team color
+      One-liner: 
+        CSK: "Thala for a reason. Reason: suffering."
+        MI: "5 trophies. 0 wins this week."
+        RCB: "Loading since 2008..."
+        PBKS: "Table toppers?? IS THIS REAL??"
+        KKR: "Shreyas Iyer said say less"
+        SRH: "226 runs and still anxious"
+        DC: "Quietly destroying everyone rn"
+        GT: "We won fast. Now we're just here."
+        RR: "One trophy, maximum drama"
+        LSG: "Goenka sahab's expression = our mood"
+    
+    Hover: 
+      transform: translateY(-8px) rotate(-2deg)
+      box-shadow: 8px 8px 0 var(--card-team-color)
+    
+    Click:
+      fanState.team = teamName
+      fanState.teamColor = teamColor
+      Update CSS --team-color property
+      Card explodes: GSAP scatter animation
+        (card splits into 20 confetti pieces 
+        in team colors, rains down)
+      All other cards: GSAP opacity 0
+      Bat cursor changes color
+      Scroll to Scene 2 after 1.2s
+
+Audio:
+  IPL-style drum beat (synthetic, Howler)
+  Each card hover: subtle drum tap SFX
+  Card select: crowd cheer SFX
+  Transition: whistle SFX (like match start)
+
+════════════════════════════════════════
+SCENE 2 — BRAIN SCAN
+════════════════════════════════════════
+
+Background: dark blue (#0d1b2a), medical aesthetic
+
+MRI machine animation (CSS):
+  Outer oval: border 3px solid #00d4ff
+  Scanning line: div, height 3px, 
+    background: linear-gradient(90deg, transparent, #00d4ff, transparent)
+    animation: translateY through the brain oval, 3s loop
+  Scanning SFX: Howler loop while on scene
+
+Brain SVG (inline, 300px):
+  Draw simple brain outline SVG
+  Divided into 6 clickable regions:
+  
+  Region 1 (prefrontal - logic):
+    Highlight color: team color
+    Click tooltip: 
+      CSK: "Toss anxiety: CRITICAL. Ruturaj please."
+      MI: "Bumrah dependency: SEVERE"
+      PBKS: "Cooper Connolly??? ORANGE CAP???"
+      RCB: "Still processing 2016 final"
+  
+  Region 2 (amygdala - fear):
+    "Last over survival instinct: OVERDEVELOPED"
+    
+  Region 3 (hippocampus - memory):
+    Team specific: 
+      CSK: "Dhoni 2011 WC six: stored forever"
+      MI: "Kieron Pollard moments: MUSEUM QUALITY"
+      RCB: "AB de Villiers retirement: unprocessed grief"
+      
+  Region 4 (temporal - sound):
+    "Crowd noise tolerance: STADIUM ONLY"
+    "Commentary mute reflex: HAIR TRIGGER"
+    
+  Region 5 (cerebellum - reflex):
+    "Refreshing Cricbuzz: 847 times today"
+    "Score checking frequency: unhealthy"
+    
+  Region 6 (brainstem - survival):
+    "Life during IPL season: 
+     sleep optional, matches mandatory"
+
+  Each region:
+    Hover: glows in team color, pulsing
+    Click: tooltip modal slides in from side
+      Content: meme-format text + trauma score +X
+      GSAP: scale from 0.5 to 1, ease back.out
+
+Trauma score counter (top right):
+  Increments per brain region clicked
+  Display: "Trauma Level: X%"
+  CountUp.js animation
+
+Audio: 
+  MRI scanning hum (Howler loop)
+  Brain region click: medical "ping" SFX
+  High trauma: beeping gets faster
+
+════════════════════════════════════════
+SCENE 3 — IPL 2026 TRAUMA TIMELINE
+════════════════════════════════════════
+
+Layout: horizontal scroll container
+  width: 400vw
+  GSAP ScrollTrigger: pin this section
+  horizontal: true
+  scrub: 1
+
+Background gradient: transitions left→right
+  From: team color dark → deeper dark → red → orange
+
+Timeline cards (6 cards, one per match):
+
+Card 0 (March 22 - IPL Start):
+  Title: "IPL 2026 SHURU"
+  "Hope levels: MAXIMUM"
+  "Every fan: 'This is OUR year'"
+  "Stat: All 10 teams had 'strong squads'"
+
+Card 1 (April 1 - DC vs LSG):  
+  Title: "GOENKA SAHAB MOMENT 😭"
+  "LSG 141 all out. KL Rahul: golden duck."
+  "First ball of the match. FIRST BALL."
+  "'Aa gayi poori family Pant ki class lene'"
+  Emoji: 😭
+  
+Card 2 (April 2 - KKR vs SRH):
+  Title: "226 RUNS AND STILL STRESS"
+  "SRH: Travis Head 46 off 21"
+  "KKR fans: 'Easy chase'"
+  "*nervous laughter*"
+  
+Card 3 (April 3 - CSK vs PBKS):
+  Title: "PRIYANSH ARYA 39 OFF 11 💀"
+  "CSK bowling in powerplay: 😵"
+  "Sanju Samson: 7 runs off 7"
+  "Ruturaj: 'Dhoni wake up please'"
+  "PBKS: TABLE TOPPERS"
+  
+Card 4 (April 4 - MI vs DC):
+  Title: "HARDIK PANDYA: INJURED"
+  "Maheika didn't come to watch 🐰"
+  "Suryakumar took over, smiled throughout"
+  "MI lost anyway. Bumrah cried internally."
+  
+Card 5 (Today - Looking Forward):
+  Title: "YOUR FAN PROGNOSIS"
+  "Scroll ahead for your personality type →"
+  Pulsing arrow
+
+Each card:
+  CSS: scoreboard aesthetic
+    dark background, colored header bar
+    Rajdhani Bold font
+    Team emoji floating up (CSS animation)
+  
+  On scroll enter (GSAP):
+    translateX(-60px, opacity:0) → (0, opacity:1)
+  
+  Hover: slight 3D tilt (CSS perspective + mousemove)
+  Click: flip card (CSS backface-visibility)
+    Back: "Actual meme caption from that day" 
+    + trauma score increment
+
+Audio:
+  Horizontal scroll: vinyl record scratch on start
+  Each card enter: crowd reaction SFX 
+    (cheer for win cards, groan for loss cards)
+  Timeline music: cricket commentary ambient
+
+════════════════════════════════════════
+SCENE 4 — FAN PERSONALITY TYPE
+════════════════════════════════════════
+
+Full screen reveal, team color background
+
+Large text reveal (GSAP stagger per word):
+  "YOU ARE..."
+  [dramatic pause — 1.5s]
+  [PERSONALITY TYPE IN ALL CAPS]
+
+Team-specific personalities:
+CSK: "THE ETERNAL OPTIMIST WHO 
+      HASN'T SLEPT SINCE TUESDAY"
+      Powers: Unwavering faith | Yellow everything | 
+              Blaming the pitch
+              
+MI: "THE AGGRESSIVE MANIFEST-OR"
+    Powers: '5 trophies' as rebuke | 
+            Suryakumar appreciation | 
+            Bumrah protection squad
+
+RCB: "THE PROFESSIONAL HEARTBROKEN POET"
+     Powers: Eloquent suffering |
+             Kohli fan art |
+             'Next year' as religion
+
+PBKS: "THE BEWILDERED TABLE-TOPPER"
+      Powers: Cooper Connolly trivia |
+              Table refresh addiction |
+              'Is this actually happening?' energy
+
+KKR: "THE NONCHALANT ROYALIST"
+     Powers: KKR mystery |
+             Venkatesh Iyer over-reliance |
+             'Eden Gardens said so' defense
+
+SRH: "THE HIGH-SCORING ANXIOUS ONE"
+     Powers: 220+ and still nervous |
+             Travis Head worship |
+             Orange Army energy
+
+DC: "THE QUIETLY CONFIDENT UNDERDOG"
+    Powers: Sameer Rizvi protection |
+            Actually winning rn |
+            'No one talks about us' advantage
+
+Animations:
+  Personality title: GSAP splitText per letter
+    Letters fall from top, stagger 0.05s
+    Land with slight bounce (ease: back.out)
+  
+  Powers: appear one by one with 
+    checkmark animation (SVG drawSVGPlugin)
+  
+  Background: team color gradient, 
+    subtle particle system in team colors
+    (Canvas, 100 small dots floating)
+
+  Team mascot: large emoji, 
+    CSS: float animation, slow rotation
+
+Audio:
+  Drum roll → reveal crash SFX
+  Personality-specific audio:
+    CSK: sad violin + then hopeful note
+    RCB: dramatic Bollywood sting
+    PBKS: triumphant cheer
+    MI: confident bass beat
+
+════════════════════════════════════════
+SCENE 5 — THE PRESCRIPTION
+════════════════════════════════════════
+
+Background: aged paper texture
+  CSS: background-color #f5e6c8
+  Subtle lined paper (repeating-linear-gradient)
+  Corner decorative border (CSS)
+
+Prescription header:
+  "DR. DHONI'S CRICKET CLINIC"
+  "MBBS, MS (CSK), PhD (Finishing Games)"
+  "Est. 2004 | Success Rate: Complicated"
+  
+  Font: Courier Prime
+  Top border: CSS prescription pad style
+
+Patient info (fills with user's team):
+  "Patient: [TEAM] Fan"
+  "Date: April 2026"
+  "Diagnosis: Acute IPL Fever, 
+   Chronic Hope Syndrome"
+  "Trauma Score: [X]%"
+
+Prescription content (handwriting animation):
+  CSS: animation draws text left-to-right 
+    via width clip on each line
+  Delay: 0.5s per line
+  
+  Lines (team-customized):
+  "Rx:"
+  "1. Stop checking Cricbuzz at 2 AM ❌"
+  "2. Accept [TEAM-SPECIFIC LINE]"
+  "   CSK: Sanju Samson needs time
+      MI: Hardik will return (probably)
+      RCB: It's okay to feel things
+      PBKS: You are actually winning"
+  "3. One (1) cold Thums Up after each loss"
+  "4. NO Twitter after first powerplay"
+  "5. Repeat: 'Yeh toh sirf cricket hai'"
+  "   [Patient refused. Understandable.]"
+  
+  "—Dr. Dhoni 🦁"
+  Signature: CSS cursive squiggle SVG
+
+Stamp animation:
+  "PRESCRIBED" stamp in red 
+  GSAP: scale from 3 to 1, rotate -15deg
+  Stamp SFX: ink stamp sound
+
+Share buttons:
+  "📱 SHARE ON WHATSAPP" (primary, green)
+    → html2canvas captures prescription div
+    → WhatsApp share URL: wa.me with image
+    
+  "🐦 SHARE ON TWITTER"
+    → Opens tweet with prescription summary
+    
+  "⬇️ SAVE PRESCRIPTION"
+    → Download PNG
+
+Audio:
+  Paper ambient, pen scratch SFX per line
+  Stamp: hard stamp SFX
+  Share button: success chime
+
+════════════════════════════════════════
+SCENE 6 — POINTS TABLE OF LIFE
+════════════════════════════════════════
+
+Replica of IPL 2026 points table aesthetics
+Background: #1a1a2e (IPL dark theme)
+
+Table header:
+  "IPL 2026 POINTS TABLE (EMOTIONAL EDITION)"
+  BCCI logo replaced with crying emoji
+
+Columns: 
+  TEAM | W | L | MEME OUTPUT | FAN SUFFERING | 
+  TWITTER WARS | HOPE REMAINING%
+
+Rows (CountUp.js animates numbers on scroll enter):
+  PBKS | 2 | 0 | 📈 PEAK | 12% | 847 | 99%
+  DC | 1 | 0 | 📊 RISING | 25% | 1.2K | 87%  
+  SRH | 1 | 1 | 📈 HIGH | 45% | 3.4K | 76%
+  KKR | 1 | 1 | 📊 MEDIUM | 50% | 2.1K | 70%
+  MI | 0 | 1 | 📉 MANAGED | 65% | 5.7K | 68%
+  GT | 0 | 1 | 📊 QUIET | 40% | 980 | 65%
+  RR | 0 | 1 | 📊 DIGNIFIED | 55% | 1.8K | 60%
+  CSK | 0 | 2 | 📈 VIRAL | 89% | 8.9K | "It's Thala"
+  LSG | 0 | 1 | 📉 GOENKA | 78% | 4.2K | 34%
+  RCB | 0 | 0 | 📈 ETERNAL | 100% | ∞ | "Yes"
+
+User's team row: highlighted in team color
+  Slight glow effect (box-shadow)
+  Cursor hover: tooltip "You are here 👆"
+
+Bottom line:
+  "Table accurate as of April 5, 2026"
+  "Emotional columns: ± ∞ error margin"
+  "Source: Your group chats"
+
+Share button: "📊 Share This Table"
+  Captures table as PNG → WhatsApp
+
+Make this feel like a page every Indian 
+cricket fan would screenshot, share in their
+IPL WhatsApp group, and tag their friends in.
+It must work perfectly on mobile phones.
+Hindi phrases throughout add authenticity.
